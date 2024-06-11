@@ -23,14 +23,16 @@ public class ToolBar extends JToolBar {
         String[] buttonIcons = { "/image/select.png", "/image/association.png", "/image/generalization.png",
                 "/image/composition.png", "/image/class.png", "/image/usecase.png" };
 
-        String[] types = { "selection", "association", "generalization", "composition", "class", "usecase" };
+        ButtonType[] types = { ButtonType.SELECTION, ButtonType.ASSOCIATION, ButtonType.GENERALIZATION,
+                ButtonType.COMPOSITION,
+                ButtonType.CLASS, ButtonType.USECASE };
 
         for (int i = 0; i < buttonIcons.length; i++) {
             add(setButton(buttonIcons[i], types[i]));
         }
     }
 
-    public JButton setButton(String img, String type) {
+    public JButton setButton(String img, ButtonType type) {
         JButton button = new JButton();
         ImageIcon icon = new ImageIcon(getClass().getResource(img));
         Image scaledImage = icon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);

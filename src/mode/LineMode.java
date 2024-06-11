@@ -10,8 +10,7 @@ import shape.*;
 import UI.*;
 
 public class LineMode extends Mode {
-    private String lineType = null;
-    private ShapeFactory factory = new ShapeFactory();
+    private LineType lineType;
     private Canvas canvas;
     private Point startPoint;
     private Point endPoint;
@@ -19,7 +18,7 @@ public class LineMode extends Mode {
     private BasicObj endObj;
     private boolean linestart = false;
 
-    public LineMode(String lineType, Canvas canvas) {
+    public LineMode(LineType lineType, Canvas canvas) {
         this.lineType = lineType;
         this.canvas = canvas;
     }
@@ -39,7 +38,7 @@ public class LineMode extends Mode {
         endObj = findObj(endPoint);
         if (linestart) {
             if (endObj != null && !startObj.equals(endObj)) {
-                Line line = factory.createLine(lineType, startPoint, endPoint, startObj);
+                Line line = lineType.create(startPoint, endPoint, startObj);
                 line.setEndOject(endObj);
                 canvas.addLine(line);
             }
@@ -54,7 +53,7 @@ public class LineMode extends Mode {
     public void mouseDragged(MouseEvent e) {
         if (linestart) {
             endPoint = e.getPoint();
-            Line line = factory.createLine(lineType, startPoint, endPoint, startObj);
+            Line line = lineType.create(startPoint, endPoint, startObj);
             canvas.setCurrentLine(line);
             canvas.repaint();
         }

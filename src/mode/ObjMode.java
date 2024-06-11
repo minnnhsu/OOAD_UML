@@ -5,17 +5,16 @@ import shape.*;
 import UI.*;
 
 public class ObjMode extends Mode {
-    private String objType = null;
-    private ShapeFactory factory = new ShapeFactory();
+    private ObjType objType;
     private Canvas canvas;
 
-    public ObjMode(String objType, Canvas canvas) {
+    public ObjMode(ObjType objType, Canvas canvas) {
         this.objType = objType;
         this.canvas = canvas;
     }
 
     public void mousePressed(MouseEvent e) {
-        Obj Obj = factory.createObj(objType, e.getPoint());
+        Obj Obj = objType.create(e.getPoint());
         canvas.addObj(Obj);
         canvas.repaint();
     }

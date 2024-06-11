@@ -27,10 +27,10 @@ public class Canvas extends JPanel {
 	private List<Obj> selectedObjs = new ArrayList<>();
 	private Line currentLine = null;
 	private Rectangle selectionRect;
-	private String type = "selection";
+	private ButtonType type = ButtonType.SELECTION;
 
 	private Mode currentMode;
-	private Map<String, Mode> modeMap = new HashMap<>();
+	private Map<ButtonType, Mode> modeMap = new HashMap<>();
 
 	private Canvas() {
 		setBackground(Color.WHITE);
@@ -100,7 +100,7 @@ public class Canvas extends JPanel {
 		currentLine = line;
 	}
 
-	public String getType() {
+	public ButtonType getType() {
 		return type;
 	}
 
@@ -112,7 +112,7 @@ public class Canvas extends JPanel {
 		return selectedObjs;
 	}
 
-	public void setMode(String type) {
+	public void setMode(ButtonType type) {
 		this.type = type;
 		Mode mode = modeMap.get(type);
 		if (mode != null) {
@@ -133,12 +133,12 @@ public class Canvas extends JPanel {
 	}
 
 	private void initializeModes() {
-		modeMap.put("selection", new SelectMode(this));
-		modeMap.put("association", new LineMode("association", this));
-		modeMap.put("generalization", new LineMode("generalization", this));
-		modeMap.put("composition", new LineMode("composition", this));
-		modeMap.put("class", new ObjMode("class", this));
-		modeMap.put("usecase", new ObjMode("usecase", this));
+		modeMap.put(ButtonType.SELECTION, new SelectMode(this));
+		modeMap.put(ButtonType.ASSOCIATION, new LineMode(LineType.ASSOCIATION, this));
+		modeMap.put(ButtonType.GENERALIZATION, new LineMode(LineType.GENERALIZATION, this));
+		modeMap.put(ButtonType.COMPOSITION, new LineMode(LineType.COMPOSITION, this));
+		modeMap.put(ButtonType.CLASS, new ObjMode(ObjType.CLASS, this));
+		modeMap.put(ButtonType.USECASE, new ObjMode(ObjType.USECASE, this));
 	}
 
 	public void drawSelectWindow(Point startPoint, Point endPoint) {

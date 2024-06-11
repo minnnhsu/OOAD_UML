@@ -91,21 +91,21 @@ public class MenuBar extends JMenuBar {
 
 	class UngroupObjectListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals("selection"))
+			if (canvas.getType().equals(ButtonType.SELECTION))
 				canvas.removeGroup();
 		}
 	}
 
 	class GroupObjectListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals("selection"))
+			if (canvas.getType().equals(ButtonType.SELECTION))
 				canvas.addGroup();
 		}
 	}
 
 	class ChangeNameListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals("selection")
+			if (canvas.getType().equals(ButtonType.SELECTION)
 					&& canvas.getSelectedObjects().get(canvas.getSelectedObjects().size() - 1) instanceof BasicObj)
 				changeNameForm();
 		}
