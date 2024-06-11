@@ -26,10 +26,9 @@ public class LineMode extends Mode {
     public void mousePressed(MouseEvent e) {
         startPoint = e.getPoint();
         startObj = findObj(startPoint);
-        if (startObj != null) {
-            if (startObj.choosePort(startPoint) != null)
-                linestart = true;
-        }
+        if (startObj != null && startObj.choosePort(startPoint) != null)
+            linestart = true;
+
         canvas.setSelectedObjects(new ArrayList<Obj>(Arrays.asList(startObj)));
         repaintCanvas(canvas);
     }
@@ -38,12 +37,10 @@ public class LineMode extends Mode {
         endPoint = e.getPoint();
         endObj = findObj(endPoint);
         if (linestart) {
-            if (endObj != null && !startObj.equals(endObj)) {
-                if (endObj.choosePort(endPoint) != null) {
-                    Line line = lineType.create(startPoint, endPoint, startObj);
-                    line.setEndOject(endObj);
-                    canvas.addLine(line);
-                }
+            if (endObj != null && !startObj.equals(endObj) && endObj.choosePort(endPoint) != null) {
+                Line line = lineType.create(startPoint, endPoint, startObj);
+                line.setEndOject(endObj);
+                canvas.addLine(line);
             }
             canvas.setSelectedObjects(new ArrayList<Obj>(Arrays.asList(endObj)));
             linestart = false;

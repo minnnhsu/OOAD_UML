@@ -15,7 +15,6 @@ public class SelectMode extends Mode {
 
     public SelectMode(Canvas canvas) {
         this.canvas = canvas;
-
     }
 
     @Override
@@ -46,7 +45,6 @@ public class SelectMode extends Mode {
     @Override
     public void mouseReleased(MouseEvent e) {
         canvas.clearSelection();
-
     }
 
     public List<Obj> findObj(Point startPoint, Point endPoint) {

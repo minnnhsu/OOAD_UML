@@ -110,7 +110,5 @@ public abstract class BasicObj extends Obj {
         }
         for (Port p : ports)
             p.move(pos);
-
     }
-
 }
