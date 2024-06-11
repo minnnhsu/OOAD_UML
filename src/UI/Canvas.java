@@ -178,10 +178,8 @@ public class Canvas extends JPanel {
 	}
 
 	public void changeObjName(String text) {
-		if (selectedObjs.get(selectedObjs.size() - 1) instanceof BasicObj) {
-			BasicObj temp = (BasicObj) selectedObjs.get(selectedObjs.size() - 1);
-			temp.setObjName(text);
-		}
+		Obj temp = selectedObjs.get(selectedObjs.size() - 1);
+		temp.setObjName(text);
 		repaint();
 	}
 }

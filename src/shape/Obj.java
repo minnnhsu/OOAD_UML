@@ -41,4 +41,8 @@ public abstract class Obj {
         return null;
     }
 
+    public void setObjName(String objName) {
+
+    }
+
 }

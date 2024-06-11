@@ -77,7 +77,6 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				canvas.changeObjName(Text.getText());
 				inputTextFrame.dispose();
-
 			}
 		});
 
@@ -105,8 +104,7 @@ public class MenuBar extends JMenuBar {
 
 	class ChangeNameListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals(ButtonType.SELECTION)
-					&& canvas.getSelectedObjects().get(canvas.getSelectedObjects().size() - 1) instanceof BasicObj)
+			if (canvas.getType().equals(ButtonType.SELECTION))
 				changeNameForm();
 		}
 	}

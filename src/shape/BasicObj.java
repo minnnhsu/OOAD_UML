@@ -51,6 +51,7 @@ public abstract class BasicObj extends Obj {
         return objName;
     }
 
+    @Override
     public void setObjName(String objName) {
         this.objName = objName;
     }
