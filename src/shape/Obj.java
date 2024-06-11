@@ -45,4 +45,8 @@ public abstract class Obj {
 
     }
 
+    public List<Obj> getObjects() {
+        return null;
+    }
+
 }

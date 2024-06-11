@@ -14,8 +14,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import shape.BasicObj;
-
 public class MenuBar extends JMenuBar {
 	private Canvas canvas;
 
@@ -77,6 +75,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				canvas.changeObjName(Text.getText());
 				inputTextFrame.dispose();
+				repaintCanvas(canvas);
 			}
 		});
 
@@ -90,22 +89,32 @@ public class MenuBar extends JMenuBar {
 
 	class UngroupObjectListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals(ButtonType.SELECTION))
+			if (canvas.getType().equals(ButtonType.SELECTION)) {
 				canvas.removeGroup();
+				repaintCanvas(canvas);
+			}
 		}
 	}
 
 	class GroupObjectListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals(ButtonType.SELECTION))
+			if (canvas.getType().equals(ButtonType.SELECTION)) {
 				canvas.addGroup();
+				repaintCanvas(canvas);
+			}
 		}
 	}
 
 	class ChangeNameListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (canvas.getType().equals(ButtonType.SELECTION))
+			if (canvas.getType().equals(ButtonType.SELECTION)) {
 				changeNameForm();
+			}
+
 		}
+	}
+
+	public void repaintCanvas(Canvas c) {
+		c.repaint();
 	}
 }

@@ -28,4 +28,8 @@ public abstract class Mode implements MouseListener, MouseMotionListener {
 
 	public void mouseExited(MouseEvent e) {
 	}
+
+	public void repaintCanvas(Canvas c) {
+		c.repaint();
+	}
 }

@@ -84,7 +84,6 @@ public class Canvas extends JPanel {
 
 	public void addObj(Obj object) {
 		objects.add(object);
-		repaint();
 	}
 
 	public List<Obj> getObjests() {
@@ -93,7 +92,6 @@ public class Canvas extends JPanel {
 
 	public void addLine(Line line) {
 		lines.add(line);
-		repaint();
 	}
 
 	public void setCurrentLine(Line line) {
@@ -164,22 +162,30 @@ public class Canvas extends JPanel {
 				objects.remove(obj);
 			}
 			selectedObjs = new ArrayList<Obj>(Arrays.asList(temp));
-			repaint();
 		}
 	}
 
 	public void removeGroup() {
 		System.out.println("ungroup " + selectedObjs.size());
-		Group removeGroup = (Group) selectedObjs.get(0);
-		objects.addAll(removeGroup.getObjects());
-		objects.remove(removeGroup);
-		selectedObjs = removeGroup.getObjects();
-		repaint();
+		List<Obj> temp = new ArrayList<>();
+		for (Obj obj : selectedObjs) {
+			if (obj.getObjects() != null) {
+				objects.addAll(obj.getObjects());
+				objects.remove(obj);
+				temp.addAll(obj.getObjects());
+			} else {
+				temp.add(obj);
+			}
+		}
+		selectedObjs = temp;
 	}
 
 	public void changeObjName(String text) {
-		Obj temp = selectedObjs.get(selectedObjs.size() - 1);
+		Obj temp = getTopSelectedObj();
 		temp.setObjName(text);
-		repaint();
+	}
+
+	public Obj getTopSelectedObj() {
+		return selectedObjs.get(selectedObjs.size() - 1);
 	}
 }

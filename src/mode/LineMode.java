@@ -14,8 +14,8 @@ public class LineMode extends Mode {
     private Canvas canvas;
     private Point startPoint;
     private Point endPoint;
-    private BasicObj startObj;
-    private BasicObj endObj;
+    private Obj startObj;
+    private Obj endObj;
     private boolean linestart = false;
 
     public LineMode(LineType lineType, Canvas canvas) {
@@ -27,10 +27,11 @@ public class LineMode extends Mode {
         startPoint = e.getPoint();
         startObj = findObj(startPoint);
         if (startObj != null) {
-            linestart = true;
+            if (startObj.choosePort(startPoint) != null)
+                linestart = true;
         }
         canvas.setSelectedObjects(new ArrayList<Obj>(Arrays.asList(startObj)));
-        canvas.repaint();
+        repaintCanvas(canvas);
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -38,15 +39,17 @@ public class LineMode extends Mode {
         endObj = findObj(endPoint);
         if (linestart) {
             if (endObj != null && !startObj.equals(endObj)) {
-                Line line = lineType.create(startPoint, endPoint, startObj);
-                line.setEndOject(endObj);
-                canvas.addLine(line);
+                if (endObj.choosePort(endPoint) != null) {
+                    Line line = lineType.create(startPoint, endPoint, startObj);
+                    line.setEndOject(endObj);
+                    canvas.addLine(line);
+                }
             }
             canvas.setSelectedObjects(new ArrayList<Obj>(Arrays.asList(endObj)));
             linestart = false;
         }
         canvas.setCurrentLine(null);
-        canvas.repaint();
+        repaintCanvas(canvas);
     }
 
     @Override
@@ -55,23 +58,24 @@ public class LineMode extends Mode {
             endPoint = e.getPoint();
             Line line = lineType.create(startPoint, endPoint, startObj);
             canvas.setCurrentLine(line);
-            canvas.repaint();
+            repaintCanvas(canvas);
         }
 
     }
 
-    public BasicObj findObj(Point pos) {
+    public Obj findObj(Point pos) {
         List<Obj> temp = new ArrayList<>();
         List<Obj> checkObjs = canvas.getObjests();
         for (int i = checkObjs.size() - 1; i >= 0; i--) {
             temp = checkObjs.get(i).inside(pos);
-            if (temp.size() > 0 && temp.get(temp.size() - 1) instanceof BasicObj) {
+            if (temp.size() > 0) {
                 break;
             }
         }
-        if (temp.size() == 0 || !(temp.get(temp.size() - 1) instanceof BasicObj)) {
+        if (temp.size() == 0) {
             return null;
         }
-        return (BasicObj) temp.get(temp.size() - 1);
+        return temp.get(temp.size() - 1);
     }
+
 }

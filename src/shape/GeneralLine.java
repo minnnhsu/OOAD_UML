@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public class GeneralLine extends Line {
-    public GeneralLine(Point startPoint, Point endPoint, BasicObj startObj) {
+    public GeneralLine(Point startPoint, Point endPoint, Obj startObj) {
         super(startPoint, endPoint, startObj);
     }
 

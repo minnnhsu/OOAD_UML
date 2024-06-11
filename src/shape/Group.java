@@ -74,6 +74,7 @@ public class Group extends Obj {
         }
     }
 
+    @Override
     public List<Obj> getObjects() {
         return objects;
     }

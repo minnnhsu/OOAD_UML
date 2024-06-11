@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public class ComposLine extends Line {
-    public ComposLine(Point startPoint, Point endPoint, BasicObj startObj) {
+    public ComposLine(Point startPoint, Point endPoint, Obj startObj) {
         super(startPoint, endPoint, startObj);
     }
 

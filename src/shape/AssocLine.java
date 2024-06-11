@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public class AssocLine extends Line {
-    public AssocLine(Point startPoint, Point endPoint, BasicObj startObj) {
+    public AssocLine(Point startPoint, Point endPoint, Obj startObj) {
         super(startPoint, endPoint, startObj);
     }
 

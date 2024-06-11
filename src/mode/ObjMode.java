@@ -16,7 +16,7 @@ public class ObjMode extends Mode {
     public void mousePressed(MouseEvent e) {
         Obj Obj = objType.create(e.getPoint());
         canvas.addObj(Obj);
-        canvas.repaint();
+        repaintCanvas(canvas);
     }
 
 }

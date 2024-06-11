@@ -26,7 +26,7 @@ public class SelectMode extends Mode {
             singleObj = true;
         } else
             singleObj = false;
-        canvas.repaint();
+        repaintCanvas(canvas);
     }
 
     @Override
@@ -35,11 +35,11 @@ public class SelectMode extends Mode {
             Obj temp = canvas.getSelectedObjects().get(0);
             temp.move(new Point(e.getPoint().x - startPoint.x, e.getPoint().y - startPoint.y));
             startPoint = e.getPoint();
-            canvas.repaint();
+            repaintCanvas(canvas);
         } else {
             canvas.drawSelectWindow(startPoint, e.getPoint());
             canvas.setSelectedObjects(findObj(startPoint, e.getPoint()));
-            canvas.repaint();
+            repaintCanvas(canvas);
         }
     }
 
@@ -47,22 +47,6 @@ public class SelectMode extends Mode {
     public void mouseReleased(MouseEvent e) {
         canvas.clearSelection();
 
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
     }
 
     public List<Obj> findObj(Point startPoint, Point endPoint) {
