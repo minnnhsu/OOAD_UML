@@ -8,7 +8,7 @@ import java.util.List;
 public abstract class BasicObj extends Obj {
     protected String objName = "object name";
     protected List<Point> portPosition = new ArrayList<>();
-    protected Ports ports;
+    protected List<Port> ports = new ArrayList<>();
 
     // top, bottom, left, right: {changeX, changeY}
     protected int pointChange[][] = { { 1, 0 }, { 1, 2 }, { 0, 1 }, { 2, 1 } };
@@ -40,13 +40,11 @@ public abstract class BasicObj extends Obj {
         }
 
         // points to ports
-        List<Point> portPoints = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             int tempX = portPosition.get(i).x + pointToPort[i][0] * halfPortSize;
             int tempY = portPosition.get(i).y + pointToPort[i][1] * halfPortSize;
-            portPoints.add(new Point(tempX, tempY));
+            ports.add(new Port(new Point(tempX, tempY)));
         }
-        ports = new Ports(portPoints, halfPortSize * 2);
     }
 
     public String getObjName() {
@@ -59,7 +57,8 @@ public abstract class BasicObj extends Obj {
 
     @Override
     public void drawSelected(Graphics g) {
-        ports.draw(g);
+        for (Port p : ports)
+            p.draw(g);
     }
 
     @Override
@@ -108,7 +107,8 @@ public abstract class BasicObj extends Obj {
             portPosition.get(i).x += pos.x;
             portPosition.get(i).y += pos.y;
         }
-        ports.move(pos);
+        for (Port p : ports)
+            p.move(pos);
 
     }
 
