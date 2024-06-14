@@ -20,21 +20,14 @@ public class ToolBar extends JToolBar {
         setFloatable(false);
         setOrientation(JToolBar.VERTICAL);
 
-        String[] buttonIcons = { "/image/select.png", "/image/association.png", "/image/generalization.png",
-                "/image/composition.png", "/image/class.png", "/image/usecase.png" };
-
-        ButtonType[] types = { ButtonType.SELECTION, ButtonType.ASSOCIATION, ButtonType.GENERALIZATION,
-                ButtonType.COMPOSITION,
-                ButtonType.CLASS, ButtonType.USECASE };
-
-        for (int i = 0; i < buttonIcons.length; i++) {
-            add(setButton(buttonIcons[i], types[i]));
+        for (ButtonType type : ButtonType.values()) {
+            add(setButton(type));
         }
     }
 
-    public JButton setButton(String img, ButtonType type) {
+    public JButton setButton(ButtonType type) {
         JButton button = new JButton();
-        ImageIcon icon = new ImageIcon(getClass().getResource(img));
+        ImageIcon icon = new ImageIcon(getClass().getResource(type.getIconPath()));
         Image scaledImage = icon.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
         button.setIcon(new ImageIcon(scaledImage));
         button.setPreferredSize(new Dimension(80, 80));
