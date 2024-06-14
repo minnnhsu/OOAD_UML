@@ -54,12 +54,16 @@ public class Canvas extends JPanel {
 		super.paintComponent(g);
 		if (objects.size() > 0) {
 			for (Obj obj : objects) {
-				obj.draw(g);
+				if (obj != null) {
+					obj.draw(g);
+				}
 			}
 		}
 		if (selectedObjs.size() > 0) {
 			for (Obj obj : selectedObjs) {
-				obj.drawSelected(g);
+				if (obj != null) {
+					obj.drawSelected(g);
+				}
 			}
 		}
 		if (currentLine != null) {
